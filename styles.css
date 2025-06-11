@@ -1,0 +1,294 @@
+/* Theme color variables for light/dark modes */
+:root {
+  --bg-color: black;
+  --text-color: white;
+  --control-bg: rgba(0, 0, 0, 0.5);
+  --glow-color: #00ccff;
+}
+body.light-mode {
+  --bg-color: white;
+  --text-color: black;
+  --control-bg: rgba(255, 255, 255, 0.5);
+  --glow-color: #ff9900;
+}
+
+/* Body setup */
+body {
+  margin: 0;
+  overflow: hidden;
+  background-color: var(--bg-color);
+  font-family: 'Segoe UI', sans-serif;
+  color: var(--text-color);
+  transition: background-color 0.4s, color 0.4s;
+  touch-action: manipulation; /* Better touch handling */
+}
+
+/* UI panels - Mobile first approach */
+#controlPanel {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 10px;
+}
+
+#speedControl, #mobileButtons {
+  background-color: var(--control-bg);
+  padding: 10px;
+  border-radius: 10px;
+  backdrop-filter: blur(6px);
+  width: auto;
+}
+
+#mobileButtons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+#pauseResume, #toggleTheme {
+  position: static;
+  background: none;
+  padding: 0;
+}
+
+/* Desktop layout */
+@media (min-width: 768px) {
+  #controlPanel {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  #speedControl {
+    position: absolute;
+    left: 10px;
+    width: 170px;
+  }
+  
+  #mobileButtons {
+    position: absolute;
+    right: 10px;
+    background: none;
+    padding: 0;
+  }
+  
+  #toggleTheme {
+    position: absolute;
+    right: 120px;
+  }
+  
+  #pauseResume {
+    position: absolute;
+    right: 10px;
+  }
+}
+
+/* Speed control labels */
+#speedControl label {
+  display: block;
+  margin: 6px 0 2px;
+  cursor: pointer;
+  user-select: none;
+  font-weight: bold;
+}
+#speedControl label.highlighted {
+  color: yellow;
+  text-shadow: 0 0 5px orange;
+}
+#speedControl input[type=range] {
+  width: 100%;
+  cursor: pointer;
+}
+
+/* Reset speeds button container under speed controls */
+#resetContainer {
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Cosmic stars background */
+body::before {
+  content: "";
+  position: fixed;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(white 1px, transparent 1px), radial-gradient(white 1px, transparent 1px);
+  background-size: 80px 80px;
+  background-position: 0 0, 40px 40px;
+  animation: stars 100s linear infinite;
+  z-index: 0;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  opacity: 0.2;
+}
+
+@keyframes stars {
+  from { transform: translate(0, 0); }
+  to { transform: translate(-100px, 100px); }
+}
+
+/* Cosmic rays animation */
+body::after {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: repeating-linear-gradient(
+    120deg,
+    rgba(255,255,255,0.02),
+    rgba(255,255,255,0.02) 2px,
+    transparent 2px,
+    transparent 6px
+  );
+  animation: cosmicRay 30s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.1;
+}
+
+@keyframes cosmicRay {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(10%, 10%) rotate(360deg); }
+}
+
+/* Main heading with sparkle in text only */
+#heading {
+  position: absolute;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15;
+  padding: 12px 20px;
+  font-size: 24px;
+  font-weight: 800;
+  background: linear-gradient(90deg, var(--glow-color), #fff, var(--glow-color));
+  background-size: 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: sparkleShine 4s linear infinite;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  #heading {
+    padding: 18px 40px;
+    font-size: 44px;
+  }
+}
+
+@keyframes sparkleShine {
+  0% { background-position: -100% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Planet labels */
+.planetLabel {
+  position: absolute;
+  color: var(--text-color);
+  background-color: var(--control-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 15;
+  display: none;
+}
+
+/* Selected planet label */
+.selectedPlanetLabel {
+  position: absolute;
+  color: yellow;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 14px;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 20;
+  display: none;
+  user-select: none;
+  text-shadow: 0 0 4px black;
+}
+
+/* Transparent, sparkling buttons */
+button {
+  background: transparent;
+  color: var(--glow-color);
+  border: 2px solid var(--glow-color);
+  padding: 8px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  position: relative;
+  z-index: 5;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+  box-shadow: 0 0 10px var(--glow-color);
+  backdrop-filter: blur(5px);
+}
+button::after {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 10%, transparent 60%);
+  animation: sparkle 2s linear infinite;
+  pointer-events: none;
+}
+@keyframes sparkle {
+  0% { transform: rotate(0deg) translate(-50%, -50%); }
+  100% { transform: rotate(360deg) translate(-50%, -50%); }
+}
+
+@media (hover: hover) {
+  button:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 20px var(--glow-color), 0 0 40px var(--glow-color);
+    color: white;
+  }
+}
+
+/* Bottom info box */
+#infoBox {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: none;
+  background-color: var(--control-bg);
+  color: var(--text-color);
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 25;
+  max-width: none;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  #infoBox {
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px 10px 0 0;
+    max-width: 600px;
+    padding: 15px 20px;
+    font-size: 16px;
+  }
+}

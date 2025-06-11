@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Solar System Simulation</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div class="container">
+    <!-- Control Panel Container -->
+    <div id="controlPanel">
+      <!-- Speed Control Panel -->
+      <div id="speedControl">
+        <strong>Speed Control</strong>
+        <div id="controls"></div>
+
+        <!-- Reset Speeds Button placed directly below controls -->
+        <div id="resetContainer">
+          <button id="resetSpeedsButton">Reset Speeds</button>
+        </div>
+      </div>
+
+      <!-- Button Group for mobile -->
+      <div id="mobileButtons">
+        <!-- Pause/Resume Button -->
+        <div id="pauseResume">
+          <button id="toggleButton">Pause</button>
+        </div>
+
+        <!-- Theme Toggle Button -->
+        <div id="toggleTheme">
+          <button id="themeButton">Toggle Dark/Light</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Animated Heading -->
+    <div id="heading">🔭Solar System Simulation</div>
+
+    <!-- Selected Planet Label -->
+    <div id="selectedPlanetLabel" class="selectedPlanetLabel"></div>
+
+    <!-- Bottom Info Box -->
+    <div id="infoBox"></div>
+  </div>
+
+  <!-- Three.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>
