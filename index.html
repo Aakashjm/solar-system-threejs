@@ -8,9 +8,12 @@
 </head>
 <body>
 
+  <!-- Panel Toggle Button -->
+  <button id="panelToggleButton">☰</button>
+
   <div class="container">
     <!-- Control Panel Container -->
-    <div id="controlPanel">
+    <div id="controlPanel" class="hidden">
       <!-- Speed Control Panel -->
       <div id="speedControl">
         <strong>Speed Control</strong>
@@ -18,7 +21,7 @@
 
         <!-- Reset Speeds Button placed directly below controls -->
         <div id="resetContainer">
-          <button id="resetSpeedsButton">Reset Speeds</button>
+          <button id="resetSpeedsButton">↻Reset Speeds</button>
         </div>
       </div>
 
@@ -31,7 +34,7 @@
 
         <!-- Theme Toggle Button -->
         <div id="toggleTheme">
-          <button id="themeButton">Toggle Dark/Light</button>
+          <button id="themeButton">🔦Theme Dark/Light</button>
         </div>
       </div>
     </div>
@@ -49,6 +52,17 @@
   <!-- Three.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
   <script src="script.js"></script>
+  <script>
+    // Toggle control panel visibility
+    document.getElementById('panelToggleButton').addEventListener('click', function() {
+      const controlPanel = document.getElementById('controlPanel');
+      controlPanel.classList.toggle('hidden');
+    });
 
+    // Toggle theme
+    document.getElementById('themeButton').addEventListener('click', function() {
+      document.body.classList.toggle('dark-theme');
+    });
+  </script>
 </body>
 </html>
